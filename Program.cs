@@ -1,11 +1,11 @@
-﻿//var pizza = new Pizza();
-//pizza.AddIngredient(new Cheddar());
-//pizza.AddIngredient(new TomatoSauce());
-//pizza.AddIngredient(new Mozzarella());
+﻿var pizza = new Pizza();
+pizza.AddIngredient(new Cheddar(1));
+pizza.AddIngredient(new TomatoSauce(3));
+pizza.AddIngredient(new Mozzarella(2));
 
-//Console.WriteLine(pizza.Describe());
+Console.WriteLine(pizza.Describe());
 
-var cheddar = new Cheddar();
+var cheddar = new Cheddar(1);
 Console.WriteLine(cheddar.PublicMethod());
 
 Console.ReadKey();
@@ -23,25 +23,45 @@ public class Pizza
 
 public class Ingredient
 {
-    public string PublicMethod() =>
+    public Ingredient(int PriceIfExtraTopping)
+    {
+        Console.WriteLine("constructor from the Ingredient class");
+        PriceIfExtraTopping = priceIfExtraTopping;
+    }
+
+    public int priceIfExtraTopping { get; }
+    public virtual string Name { get; }
+    public  string PublicMethod() =>
         "This method is PUBLIC in the Ingredient class.";
 }
 
 
 public class Cheddar : Ingredient
 {
-    public string Name => "Cheddar cheese";
+    public Cheddar(int PriceIfExtraTopping) : base(PriceIfExtraTopping)
+    {
+    }
+
+    public override string Name => "Cheddar cheese";
     public int agedForMonths { get; }
 }
 
 public class TomatoSauce : Ingredient
 {
-    public string Name => "Tomato sauce";
+    public TomatoSauce(int PriceIfExtraTopping) : base(PriceIfExtraTopping)
+    {
+    }
+
+    public override string Name => "Tomato sauce";
     public int tomatoesIn100Grams { get; }
 }
 
 public class Mozzarella : Ingredient
 {
-    public string Name => "Mozzarella";
+    public Mozzarella(int PriceIfExtraTopping) : base(PriceIfExtraTopping)
+    {
+    }
+
+    public override string Name => "Mozzarella";
     public bool isLight { get; }
 }
